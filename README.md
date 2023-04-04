@@ -8,7 +8,7 @@
 
 ## Visão geral 
 
-O projeto se chama Araucária em homenagem à minha esposa, que é bióloga. Gosto de utilizar nomes de árvores como forma de homenageá-la e, dessa vez, escolhi a Araucária por sua importância na região Sul do Brasil, onde vivemos.
+O projeto se chama Araucária em homenagem à minha futura esposa, que é bióloga. Gosto de utilizar nomes de árvores como forma de homenageá-la e, dessa vez, escolhi a Araucária por sua importância na região Sul do Brasil, onde vivemos.
 
 O projeto consiste em um programa escrito em Python que fornece uma interface de usuário para ajudar os usuários a gerenciar seus projetos no Easy Redmine. O programa possui uma janela fixa que permite aos usuários controlar as tarefas em que estão trabalhando.
 
