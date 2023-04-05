@@ -1,7 +1,7 @@
-import json
+from requestify.api_requests import ApiRequests
+
 
 def createuser(username, password):
-
     data = {
         "user_name": username,
         "password": password
@@ -11,3 +11,6 @@ def createuser(username, password):
     arquivo.write(str(data))
     arquivo.close()
 
+
+def confirm_login(username, password):
+    return ApiRequests().login(username, password)

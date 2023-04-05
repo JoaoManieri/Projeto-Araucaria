@@ -1,6 +1,8 @@
 import customtkinter
-from ui.options import option_frame
-from .login_viewmodel import createuser
+
+from ui.login.login_viewmodel import createuser
+from ui.login.login_viewmodel import confirm_login
+from ui.main_frame import main_view
 
 def login_frame():
     customtkinter.set_appearance_mode("dark")
@@ -9,10 +11,16 @@ def login_frame():
     root = customtkinter.CTk()
     root.geometry("500x400")
 
+    def certificate():
+        if confirm_login(username.get(),password.get()) :
+            destroi_login()
+        else:
+            label_error_login.pack(pady=12, padx=10)
+
     def destroi_login():
         createuser(username.get(), password.get())
         root.destroy()
-        option_frame.options()
+        main_view.main_frame()
 
     frame = customtkinter.CTkFrame(master=root)
     frame.pack(pady=20, padx=60, fill="both", expand=True)
@@ -29,11 +37,13 @@ def login_frame():
     password = customtkinter.CTkEntry(master=frame, placeholder_text="Password", show="💛")
     password.pack(pady=12, padx=10)
 
-    button = customtkinter.CTkButton(master=frame, text="Login", command=destroi_login)
+    button = customtkinter.CTkButton(master=frame, text="Login", command=certificate)
 
     button.pack(pady=12, padx=10)
 
     checkbox = customtkinter.CTkCheckBox(master=frame, text="Remember Me")
     checkbox.pack(pady=12, padx=10)
+
+    label_error_login = customtkinter.CTkLabel(master=frame, text_color="red", text="Algo deu errado,tente novamente...")
 
     root.mainloop()
