@@ -48,3 +48,6 @@ python init.py
 # Contribuição
 Contribuições são bem-vindas! Para sugestões ou correções, crie uma branch.
 
+## Consumo de memoria
+![img.png](img.png)
+
