@@ -5,7 +5,8 @@
 secrets
 .idea
 scrap.txt
-data
+data/info.json
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
