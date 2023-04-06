@@ -20,3 +20,4 @@ class ActiveWindow:
     def inti(self):
         return threading.Thread(target=self.__get_foreground_window)
 
+ActiveWindow().inti().start()
