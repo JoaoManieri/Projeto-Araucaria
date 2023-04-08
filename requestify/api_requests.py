@@ -1,29 +1,34 @@
+# import this
+from requestify.loginmanager import logininfo
 import requests
-from secrets.secrets import Secrets
+# from secrets.secrets import Secrets
 import lxml.etree as etreei
 
 """
 api doccumentation url: https://easyredmine.docs.apiary.io/#
 """
 
+def login(username, password, userlink):
+    url = userlink + 'projects.json?include=trackers&offset=25&limit=25'
+    headers = {'Content-Type': 'application/json'}
+    r = requests.get(url, auth=(username, password), headers=headers).text
+    if r.__sizeof__() > 100:
+        logininfo.username = username
+        logininfo.password = password
+        logininfo.userlink = userlink
+        return True
+    else:
+        return False
+
 
 class ApiRequests:
 
     def __init__(self):
-        secrets = Secrets()
+        # secrets = Secrets()
 
-        self.__url = secrets.url
-        self.__password = secrets.password
-        self.__user = secrets.username
-
-    def login(self, username, password):
-        url = self.__url + 'projects.json?include=trackers&offset=25&limit=25'
-        headers = {'Content-Type': 'application/json'}
-        r = requests.get(url, auth=(username, password), headers=headers).text
-        if r.__sizeof__() > 100:
-            return True
-        else:
-            return False
+        self.__url = logininfo.userlink
+        self.__password = logininfo.password
+        self.__user = logininfo.username
 
     def get_projects(self):
         # Query para projeto especifico
@@ -56,5 +61,3 @@ class ApiRequests:
 
         headers = {'Content-Type': 'application/json'}
         return requests.get(url, auth=(self.__user, self.__password), headers=headers).text
-
-print(ApiRequests().get_projects())

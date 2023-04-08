@@ -41,7 +41,7 @@ pip install -r requirements.txt
 ## Como usar
 1. Execute o arquivo main.py:
 ```sh
-python init.py
+python start.py
 ```
 2. Siga as instruções na tela para gerenciar suas tarefas no Easy Redmine.
 

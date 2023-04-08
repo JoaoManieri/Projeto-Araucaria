@@ -12,7 +12,7 @@ def main_frame():
     customtkinter.set_default_color_theme("blue")
 
     app = customtkinter.CTk()
-    app.geometry("400x580")
+    app.geometry("500x400")
     app.title("Redmine Manager")
 
     topFrame = customtkinter.CTkFrame(master=app)
