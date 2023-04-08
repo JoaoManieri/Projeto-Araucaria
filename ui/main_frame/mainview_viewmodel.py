@@ -1,7 +1,6 @@
 import json
 
 import requestify.api_requests as req
-from windowmanager.active_window import ActiveWindow
 
 
 def getAllProjects():
@@ -24,7 +23,7 @@ def saveTasks(tasks):
     path = u'data/tasks.json'
 
     arquivo = open(path, 'w')
-    arquivo.write(str(data))
+    arquivo.write(json.dumps(data))
     arquivo.close()
 
 

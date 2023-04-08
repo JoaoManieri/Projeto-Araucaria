@@ -1,5 +1,6 @@
 import customtkinter
 import ui.main_frame.mainview_viewmodel as mvvm
+from ui.stopwatch import stopwatch
 
 def main_frame():
 
@@ -7,6 +8,8 @@ def main_frame():
 
     def saveTasks():
         mvvm.saveTasks(optionmenu_1.get())
+        app.destroy()
+        stopwatch.clock()
 
     customtkinter.set_appearance_mode("dark")
     customtkinter.set_default_color_theme("blue")
