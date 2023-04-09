@@ -16,6 +16,7 @@ class ActiveWindow:
     def __get_foreground_window(self):
         while True:
             self.window = win32gui.GetWindowText(win32gui.GetForegroundWindow())
+            print('pre add elemnt')
             add_element(self.window)
             print(self.window)
             sleep(1)

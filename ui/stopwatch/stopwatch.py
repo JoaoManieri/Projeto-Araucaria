@@ -6,7 +6,7 @@ import ui.stopwatch.controllerst as ct
 import customtkinter
 import win32gui
 
-from savewindows.repostgenerate import createreport
+from savewindows.repostgenerate import createreport, add_element
 from ui.main_frame import main_view
 
 from observers.myObservador import MyObservador
@@ -57,6 +57,7 @@ def clock():
             while observable.estado:
                 self.window = win32gui.GetWindowText(win32gui.GetForegroundWindow())
                 print(self.window)
+                add_element(self.window)
                 time.sleep(1)
 
         def inti(self):
