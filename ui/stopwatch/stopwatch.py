@@ -57,8 +57,6 @@ def clock():
         # Inicia o tempo
         inicio = time.time()
         savewindows.repostgenerate.initTime = inicio
-        # dt = datetime.fromtimestamp(tempo_atual)
-        # data_formatada = dt.strftime("%Y-%m-%d %H:%M:%S")
         while observable.estado:
             # Calcula o tempo decorrido
             tempo_decorrido = time.time() - inicio
@@ -90,6 +88,7 @@ def clock():
                 if time_since_last_event > timeout:
                     add_element("inativo")
                 else:
+                    print(self.window)
                     add_element(self.window)
 
         def inti(self):

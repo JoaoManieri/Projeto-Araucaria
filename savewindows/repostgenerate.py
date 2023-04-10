@@ -28,7 +28,7 @@ def createreport():
 
     data = {
         "task": task,
-        "hora_atual": str(hora_inicio),
+        "hora_inicial": str(hora_inicio),
         "hora_final": str(hora_atual),
         "list": windows
     }
