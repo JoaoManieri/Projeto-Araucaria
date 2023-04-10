@@ -1,6 +1,10 @@
 import time
 import threading
 from PIL import Image
+
+from pynput import keyboard, mouse
+
+import savewindows.repostgenerate
 import ui.stopwatch.controllerst as ct
 
 import customtkinter
@@ -13,11 +17,31 @@ from observers.myObservador import MyObservador
 from observers.observavel import Observavel
 
 def clock():
+
     # playimage = Image.open('res/play.png')
     # play_img = customtkinter.CTkImage(playimage)
     #
     # pauseimage = Image.open('res/pause.png')
     # pause_img = customtkinter.CTkImage(pauseimage)
+
+    #timeout para tempo inativo
+    timeout = 60 * 1
+    last_event = time.time()
+
+    def keyboard_callback(event=None):
+        global last_event
+        last_event = time.time()
+
+    def mouse_callback(event=None):
+        global last_event
+        last_event = time.time()
+
+    keyboard_listener = keyboard.Listener(on_press=keyboard_callback)
+    mouse_listener = mouse.Listener(on_move=mouse_callback)
+
+    keyboard_listener.start()
+    mouse_listener.start()
+
 
     observable = Observavel()
     observer1 = MyObservador()
@@ -25,13 +49,16 @@ def clock():
 
     def on_closing():
         appTime.destroy()
-        main_view.main_frame()
         createreport()
+        main_view.main_frame()
 
 
     def cronometro():
         # Inicia o tempo
         inicio = time.time()
+        savewindows.repostgenerate.initTime = inicio
+        # dt = datetime.fromtimestamp(tempo_atual)
+        # data_formatada = dt.strftime("%Y-%m-%d %H:%M:%S")
         while observable.estado:
             # Calcula o tempo decorrido
             tempo_decorrido = time.time() - inicio
@@ -55,10 +82,15 @@ def clock():
 
         def __get_foreground_window(self):
             while observable.estado:
+
                 self.window = win32gui.GetWindowText(win32gui.GetForegroundWindow())
-                print(self.window)
-                add_element(self.window)
                 time.sleep(1)
+
+                time_since_last_event = time.time() - last_event
+                if time_since_last_event > timeout:
+                    add_element("inativo")
+                else:
+                    add_element(self.window)
 
         def inti(self):
             return threading.Thread(target=self.__get_foreground_window)
