@@ -1,9 +1,0 @@
-Tarefa: Correções de bugs  
-Você trabalhou por um total de: 0:01:38.745175 
-Você trabalhou em  por aproximadamente 00:00:01 
-Você trabalhou em Projeto-Araucaria.git - [C:\Users\Manieri\Documents\Git\Desktop\Projeto-Araucaria.git] - SmartGit 22.1.4 Non-Commercial por aproximadamente 00:00:05 
-Você trabalhou em Time-Task por aproximadamente 00:00:03 
-Você trabalhou em Projeto-Araucaria.git – repostgenerate.py por aproximadamente 00:00:22 
-Você trabalhou em Projeto-Araucaria.git – README.md por aproximadamente 00:00:10 
-Você trabalhou em Projeto-Araucaria.git – test.py por aproximadamente 00:00:06 
-Você trabalhou em Alex Serra - Outter Space por aproximadamente 00:00:06 

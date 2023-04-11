@@ -1,40 +1,43 @@
-from pynput import keyboard, mouse
 import time
 
-# inactivity timeout in seconds
-timeout = 10
+from pynput import mouse, keyboard
+import datetime
 
-# last registered event
-last_event = time.time()
+# Definindo o tempo máximo de inatividade (em segundos)
+tempo_max_inatividade = 5
 
-# callback function for keyboard events
-def keyboard_callback(event):
-    global last_event
-    last_event = time.time()
+# Definindo a última atividade como o momento atual
+ultima_atividade = datetime.datetime.now()
 
-# callback function for mouse events
-def mouse_callback(event):
-    global last_event
-    last_event = time.time()
+def on_move(x, y):
+    global ultima_atividade
+    ultima_atividade = datetime.datetime.now()
 
-# capturing keyboard and mouse events
-keyboard_listener = keyboard.Listener(on_press=keyboard_callback)
-mouse_listener = mouse.Listener(on_move=mouse_callback)
+def on_click(x, y, button, pressed):
+    global ultima_atividade
+    ultima_atividade = datetime.datetime.now()
 
-# starting the listeners
-keyboard_listener.start()
-mouse_listener.start()
+def on_scroll(x, y, dx, dy):
+    global ultima_atividade
+    ultima_atividade = datetime.datetime.now()
 
-# loop to check for inactivity
-while True:
-    # pause for 1 second
-    time.sleep(1)
+def on_press(key):
+    global ultima_atividade
+    ultima_atividade = datetime.datetime.now()
 
-    # check the time since the last event
-    time_since_last_event = time.time() - last_event
+def on_release(key):
+    global ultima_atividade
+    ultima_atividade = datetime.datetime.now()
 
-    # if the time since the last event is greater than the timeout, the computer is inactive
-    if time_since_last_event > timeout:
-        print("Computer inactive")
-    else:
-        print("Computer active")
+# Monitorando eventos do teclado e mouse
+with mouse.Listener(on_move=on_move, on_click=on_click, on_scroll=on_scroll) as listener_mouse:
+    with keyboard.Listener(on_press=on_press, on_release=on_release) as listener_keyboard:
+        while True:
+            # Verificando se o tempo de inatividade é maior que o tempo máximo
+            if (datetime.datetime.now() - ultima_atividade).total_seconds() > tempo_max_inatividade:
+                print('Inatividade detectada!')
+            else:
+                print("Em trabalho")
+                # Fazer algo aqui, como enviar uma mensagem ou executar alguma ação
+            # Esperando um segundo antes de verificar novamente
+            time.sleep(1)

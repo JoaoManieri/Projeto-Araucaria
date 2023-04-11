@@ -49,8 +49,6 @@ def createreport():
 
     itens_iguais = set(windows)
     for item in itens_iguais:
-        if item == 'inativo':
-            continue
 
         quantidade = windows.count(item)
         segundos_trabalhados = ((quantidade) * 1)

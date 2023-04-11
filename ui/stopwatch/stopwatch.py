@@ -2,8 +2,8 @@ import time
 import threading
 from PIL import Image
 
-from pynput import keyboard, mouse
-
+from pynput import mouse, keyboard
+import datetime
 import savewindows.repostgenerate
 import ui.stopwatch.controllerst as ct
 
@@ -16,31 +16,35 @@ from ui.main_frame import main_view
 from observers.myObservador import MyObservador
 from observers.observavel import Observavel
 
-def clock():
 
+def clock():
     # playimage = Image.open('res/play.png')
     # play_img = customtkinter.CTkImage(playimage)
     #
     # pauseimage = Image.open('res/pause.png')
     # pause_img = customtkinter.CTkImage(pauseimage)
 
-    #timeout para tempo inativo
-    timeout = 60 * 1
-    last_event = time.time()
+    # timeout para tempo inativo
+    # Definindo o tempo máximo de inatividade (em segundos)
+    tempo_max_inatividade = 60 * 1
 
-    def keyboard_callback(event=None):
-        global last_event
-        last_event = time.time()
+    # Definindo a última atividade como o momento atual
+    ct.ultima_atividade = datetime.datetime.now()
 
-    def mouse_callback(event=None):
-        global last_event
-        last_event = time.time()
+    def on_move(x, y):
+        ct.ultima_atividade = datetime.datetime.now()
 
-    keyboard_listener = keyboard.Listener(on_press=keyboard_callback)
-    mouse_listener = mouse.Listener(on_move=mouse_callback)
+    def on_click(x, y, button, pressed):
+        ct.ultima_atividade = datetime.datetime.now()
 
-    keyboard_listener.start()
-    mouse_listener.start()
+    def on_scroll(x, y, dx, dy):
+        ct.ultima_atividade = datetime.datetime.now()
+
+    def on_press(key):
+        ct.ultima_atividade = datetime.datetime.now()
+
+    def on_release(key):
+        ct.ultima_atividade = datetime.datetime.now()
 
 
     observable = Observavel()
@@ -51,7 +55,6 @@ def clock():
         appTime.destroy()
         createreport()
         main_view.main_frame()
-
 
     def cronometro():
         # Inicia o tempo
@@ -72,32 +75,32 @@ def clock():
             # Espera 1 segundo antes de atualizar o tempo
             time.sleep(1)
 
-
     class ActiveWindow:
 
         def __init__(self):
             self.window = None
 
         def __get_foreground_window(self):
-            while observable.estado:
 
-                self.window = win32gui.GetWindowText(win32gui.GetForegroundWindow())
-                time.sleep(1)
+            with mouse.Listener(on_move=on_move, on_click=on_click, on_scroll=on_scroll):
+                with keyboard.Listener(on_press=on_press, on_release=on_release):
+                    while observable.estado:
 
-                time_since_last_event = time.time() - last_event
-                if time_since_last_event > timeout:
-                    add_element("inativo")
-                else:
-                    print(self.window)
-                    add_element(self.window)
+                        self.window = win32gui.GetWindowText(win32gui.GetForegroundWindow())
+                        if (datetime.datetime.now() - ct.ultima_atividade).total_seconds() > tempo_max_inatividade:
+                            add_element("inativo")
+                            # print('inativo')
+                        else:
+                            # print(self.window)
+                            add_element(self.window)
+                        # Esperando um segundo antes de verificar novamente
+                        time.sleep(1)
 
         def inti(self):
             return threading.Thread(target=self.__get_foreground_window)
 
-
     def starttime():
         threading.Thread(target=cronometro).start()
-
 
     def iniciar_relogio():
         print("foi")
@@ -112,7 +115,6 @@ def clock():
             ct.status = ct.PLAY
             observable.definir_estado(False)
             on_closing()
-
 
     customtkinter.set_appearance_mode("dark")
     customtkinter.set_default_color_theme("blue")
@@ -132,9 +134,8 @@ def clock():
     label_timer.grid(row=0, column=0, pady=8, padx=16)
 
     # butoon = customtkinter.CTkButton(master=background, image=play_img, text="", width=6, command=iniciar_relogio)
-    butoon = customtkinter.CTkButton(master=background,  text="Iniciar tarefa", width=50, command=iniciar_relogio)
+    butoon = customtkinter.CTkButton(master=background, text="Iniciar tarefa", width=50, command=iniciar_relogio)
     butoon.grid(row=0, column=1, pady=8, padx=100)
-
 
     appTime.protocol("WM_DELETE_WINDOW", on_closing)
 
