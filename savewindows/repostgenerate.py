@@ -1,5 +1,6 @@
 import datetime
 import json
+import os
 
 windows = []
 
@@ -23,8 +24,14 @@ def createreport():
     dt = datetime.datetime.fromtimestamp(initTime)
     data_title = dt.strftime("%Y-%m-%d %H:%M:%S")
     hora_inicio = dt.strftime("%H:%M:%S")
+    dia = dt.strftime("%Y-%m-%d")
+    dia = dia.replace(" ", "_").replace("-", "_").replace(":", "_")
+    try:
+        os.mkdir(f'out/{dia}')
+    except:
+        pass
 
-    filename = f'out/report_{task}_{str(data_title)}.json'.replace(" ", "_").replace("-", "_").replace(":", "_")
+    filename = f'out/{dia}/report__{task}__{str(data_title)}.json'.replace(" ", "_").replace("-", "_").replace(":", "_")
 
     data = {
         "task": task,
@@ -37,7 +44,7 @@ def createreport():
     arquivo.write(json.dumps(data))
     arquivo.close()
 
-    filename = f'out/report_{task}_{str(data_title)}.txt'.replace(" ", "_").replace("-", "_").replace(":", "_")
+    filename = f'out/{dia}/report_{task}_{str(data_title)}.txt'.replace(" ", "_").replace("-", "_").replace(":", "_")
 
     arquivo = open(filename, 'w')
 
