@@ -1,0 +1,16 @@
+.htmleditor {
+    -fx-control-inner-background: #333;
+    -fx-text-fill: white;
+}
+
+.html-editor .html-editor-display {
+    -fx-background-color: #333;
+}
+
+.html-editor .html-editor-web-view {
+    -fx-background-color: #333;
+}
+
+.html-editor .html-editor-tool-bar {
+    -fx-background-color: #222;
+}

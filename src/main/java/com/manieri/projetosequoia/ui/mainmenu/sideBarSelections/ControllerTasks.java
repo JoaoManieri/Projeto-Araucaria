@@ -65,6 +65,7 @@ public class ControllerTasks extends ControllerSubMenu implements ModelSubMenu {
         try {
             _tabPane.toFront();
             FXMLLoader loader = new FXMLLoader(LoginStartAplication.class.getResource("views/tasks/list-task-view.fxml"));
+            // FXMLLoader loader = new FXMLLoader(LoginStartAplication.class.getResource("views/task/list-task-view.fxml"));
             Node content = loader.load();
 
             Tab novaAba = new Tab("Lista de atividades");

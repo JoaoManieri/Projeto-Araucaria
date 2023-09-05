@@ -16,12 +16,13 @@
 
     <dependencies>
 
-        <!-- https://mvnrepository.com/artifact/software.amazon.awssdk/s3 -->
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-web -->
         <dependency>
-            <groupId>software.amazon.awssdk</groupId>
-            <artifactId>s3</artifactId>
-            <version>2.20.93</version>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-web</artifactId>
+            <version>20.0.2</version>
         </dependency>
+
 
 
         <dependency>
