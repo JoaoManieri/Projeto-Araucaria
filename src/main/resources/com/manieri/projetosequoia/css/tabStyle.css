@@ -1,0 +1,14 @@
+.tab-pane *.tab-header-background
+{
+    -fx-background-color: #333;
+}
+.tab-label {
+    -fx-text-fill:  white; /* Defina a cor do texto da guia */
+}
+.tab:selected{
+    -fx-background-color: #333;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-border-width:0 0 2 0;
+    -fx-border-color: #333;
+}

@@ -1,0 +1,7 @@
+.no-button .button {
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-graphic: null;
+}
