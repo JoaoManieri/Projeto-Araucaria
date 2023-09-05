@@ -14,13 +14,13 @@ module com.manieri.projetosequoia {
     requires java.desktop;
     requires javafx.web;
 
-    exports com.manieri.projetosequoia;
-    exports com.manieri.projetosequoia.ui.mainmenu;
-    exports com.manieri.projetosequoia.files;
-    exports com.manieri.projetosequoia.validadeFields;
+    exports com.manieri.projetoaraucaria;
+    exports com.manieri.projetoaraucaria.ui.mainmenu;
+    exports com.manieri.projetoaraucaria.files;
+    exports com.manieri.projetoaraucaria.validadeFields;
 
-    opens com.manieri.projetosequoia.ui.task;
-    opens com.manieri.projetosequoia to javafx.fxml;
-    opens com.manieri.projetosequoia.ui.mainmenu to javafx.fxml;
+    opens com.manieri.projetoaraucaria.ui.task;
+    opens com.manieri.projetoaraucaria to javafx.fxml;
+    opens com.manieri.projetoaraucaria.ui.mainmenu to javafx.fxml;
 
 }
