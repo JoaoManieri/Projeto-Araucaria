@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
@@ -22,5 +23,8 @@
       <Button fx:id="sendButton" layoutX="274.0" layoutY="542.0" mnemonicParsing="false" onAction="#sendInfoToApi" style="-fx-background-color: #0F0F0F;" text="Enviar" textFill="WHITE" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
       <TextField fx:id="hours" layoutX="31.0" layoutY="98.0" style="-fx-control-inner-background: #1F1F1F;" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="100.0" />
       <Text fill="WHITE" layoutX="30.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horas " AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="105.0" />
+      <CheckBox fx:id="granted_task" layoutX="29.0" layoutY="145.0" mnemonicParsing="false" text="Garantia" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="135.0" />
+      <CheckBox fx:id="done_task" layoutX="107.0" layoutY="136.0" mnemonicParsing="false" text="Finalizar tarefa" textFill="WHITE" />
+      <Text fill="WHITE" layoutX="309.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data da tarefa" />
    </children>
 </AnchorPane>

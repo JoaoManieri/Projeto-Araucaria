@@ -3,7 +3,8 @@ package com.manieri.projetoaraucaria.ui.fastDaily;
 import com.manieri.projetoaraucaria.LoginStartAplication;
 import com.manieri.projetoaraucaria.model.CalendarFormater;
 import com.manieri.projetoaraucaria.model.Issues;
-import com.manieri.projetoaraucaria.ui.util.IssuesListCell;
+import com.manieri.projetoaraucaria.requests.issues.IssuesRequest;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -26,12 +27,13 @@ import java.util.ResourceBundle;
 
 public class FastDailyController implements Initializable {
 
+    ArrayList<CalendarController> listCalendar = new ArrayList<>();
 
     @FXML
-    private TextField daily_coment;
+    private TextField meeting_coment;
 
     @FXML
-    private TextField daily_time;
+    private TextField meeting_time;
 
     @FXML
     private GridPane gridPane;
@@ -45,11 +47,14 @@ public class FastDailyController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ComboBox<Issues> comboBox = new ComboBox<>();
-        comboBox.getItems().addAll();
+        try {
+            task_comboBox.getItems().addAll(new IssuesRequest().getAllIssues());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-        comboBox.setCellFactory(item -> new IssuesListCell());
-        comboBox.setButtonCell(new IssuesListCell());
+        task_comboBox.setCellFactory(item -> new IssuesListCell());
+        task_comboBox.setButtonCell(new IssuesListCell());
 
         try {
             setTitle("Domingo", 0, "#Ab3310");
@@ -130,6 +135,28 @@ public class FastDailyController implements Initializable {
         gridPane.add(stakPane, colum, row);
         CalendarController calendarController = loader.getController();
         calendarController.setDay(monthDay, color, menu);
+        listCalendar.add(calendarController);
+    }
+
+    @FXML
+    void sendButton(ActionEvent event) {
+
+        LocalDate dataAtual = LocalDate.now();
+        int anoAtual = dataAtual.getYear();
+        int mesAtual = dataAtual.getMonthValue();
+
+
+        listCalendar.forEach(it -> {
+            if (it.getDaily()) {
+                String date = String.format("%04d-%02d-%02d", anoAtual,mesAtual,Integer.parseInt(it.day));
+                try {
+                    new IssuesRequest().insertIssues(task_comboBox.getValue().getIssuesId(),date,meeting_time.getText(),meeting_coment.getText());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+
     }
 
 }

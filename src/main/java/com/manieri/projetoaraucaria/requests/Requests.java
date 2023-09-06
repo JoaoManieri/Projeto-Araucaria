@@ -2,7 +2,6 @@ package com.manieri.projetoaraucaria.requests;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.manieri.projetoaraucaria.requests.issues.CREDENTIALS;
 
 import java.io.BufferedReader;
 import java.io.IOException;

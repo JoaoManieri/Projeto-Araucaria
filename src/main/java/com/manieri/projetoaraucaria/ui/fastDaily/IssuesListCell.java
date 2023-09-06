@@ -1,4 +1,4 @@
-package com.manieri.projetoaraucaria.ui.util;
+package com.manieri.projetoaraucaria.ui.fastDaily;
 
 import com.manieri.projetoaraucaria.model.Issues;
 import javafx.scene.control.ListCell;
