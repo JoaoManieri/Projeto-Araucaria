@@ -1,5 +1,6 @@
 package com.manieri.projetoaraucaria.ui.mainmenu;
 
+import com.manieri.projetoaraucaria.ui.mainmenu.sideBarSelections.ControllerFastDaily;
 import com.manieri.projetoaraucaria.ui.mainmenu.sideBarSelections.ControllerTasks;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -39,12 +40,12 @@ public class MainMenuController {
     }
 
     @FXML
-    void clickCostumers() {
+    void clickFastDaily() {
 
-//        int indice = vbox_sideMenu.getChildren().indexOf(button_users);
-//        ControllerCostumers cm = new ControllerCostumers(vbox_sideMenu, tabPaneMain);
-//        cm.changeStatus();
-//        cm.actionSubMenu(indice + 1);
+        int indice = vbox_sideMenu.getChildren().indexOf(button_users);
+        ControllerFastDaily cm = new ControllerFastDaily(vbox_sideMenu, tabPaneMain);
+        cm.changeStatus();
+        cm.actionSubMenu(indice + 1);
 
     }
 

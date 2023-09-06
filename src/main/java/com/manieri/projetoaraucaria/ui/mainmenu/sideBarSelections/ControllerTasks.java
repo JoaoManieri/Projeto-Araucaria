@@ -32,7 +32,7 @@ public class ControllerTasks extends ControllerSubMenu implements ModelSubMenu {
         if (!StatusSubMenu.subsessionOrderIsOpen) {
 
             Button editOrder = new Button(" - Lista de tarefas");
-            editOrder.setId("editOrder_button");
+            editOrder.setId("editTasks_button");
             editOrder.setAlignment(Pos.BASELINE_LEFT);
             editOrder.setOnAction(e -> clickListTask());
             buttonBuilder(editOrder);

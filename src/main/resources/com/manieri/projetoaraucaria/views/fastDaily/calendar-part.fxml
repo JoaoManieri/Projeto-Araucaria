@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="100.0" maxWidth="500.0" prefHeight="60.0" prefWidth="250.0" style="-fx-background-color: #333;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.manieri.projetoaraucaria.ui.fastDaily.CalendarController">
+   <children>
+      <Text fx:id="month_day" fill="WHITE" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="--" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <CheckBox fx:id="daily_checkbox" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" style="-fx-background-color: #333;" text="REUNIÃO" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" />
+   </children>
+</AnchorPane>

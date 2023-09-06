@@ -16,11 +16,11 @@ import javafx.scene.text.Font;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class ControllerCostumers extends ControllerSubMenu implements ModelSubMenu{
+public class ControllerFastDaily extends ControllerSubMenu implements ModelSubMenu{
 
     private final TabPane _tabPane;
 
-    public ControllerCostumers(VBox vboxMainMenu, TabPane tabPane) {
+    public ControllerFastDaily(VBox vboxMainMenu, TabPane tabPane) {
         super(vboxMainMenu, tabPane);
         this._tabPane = tabPane;
     }
@@ -30,17 +30,11 @@ public class ControllerCostumers extends ControllerSubMenu implements ModelSubMe
 
     @Override
     public void actionSubMenu(int relativeIndex) {
-        Button newOrder = new Button(" - Novo cliente");
-        newOrder.setId("newCostummer_button");
+        Button newOrder = new Button(" - Apontamento rápido");
+        newOrder.setId("weeklyQuickNote_button");
         newOrder.setAlignment(Pos.BASELINE_LEFT);
-        newOrder.setOnAction(e -> clickNewCostumer());
+        newOrder.setOnAction(e -> weeklyQuickNote());
         buttonComplements(newOrder);
-
-        Button editOrder = new Button(" - Editar ");
-        editOrder.setId("editCostumer_button");
-        editOrder.setAlignment(Pos.BASELINE_LEFT);
-        editOrder.setOnAction(e -> editCostumer());
-        buttonComplements(editOrder);
 
         setSubSession(relativeIndex,arrayButtons,StatusSubMenu.subsessionCostumersIsOpen);
     }
@@ -64,36 +58,15 @@ public class ControllerCostumers extends ControllerSubMenu implements ModelSubMe
     }
 
     @FXML
-    protected void clickNewCostumer() {
+    protected void weeklyQuickNote() {
         try {
             _tabPane.toFront();
-            FXMLLoader loader = new FXMLLoader(LoginStartAplication.class.getResource("views/costumers/new-costumer-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(LoginStartAplication.class.getResource("views/fastDaily/fast-daily-view.fxml"));
             Node content = loader.load();
 
-
-
-            Tab novaAba = new Tab("Novo Cliente");
+            Tab novaAba = new Tab("Apontamento rápido semanal");
 
             novaAba.setStyle("-fx-background-color:  #383838;"); //muda a cor dá aba
-            novaAba.setContent(content);
-            _tabPane.getTabs().add(novaAba);
-            novaAba.getTabPane().getSelectionModel().select(novaAba);
-            novaAba.getContent().requestFocus();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    protected void editCostumer() {
-        try {
-            _tabPane.toFront();
-            FXMLLoader loader = new FXMLLoader(LoginStartAplication.class.getResource("views/costumers/edit-costumer-view.fxml"));
-            Node content = loader.load();
-
-            Tab novaAba = new Tab("Editar cliente");
-            novaAba.setStyle("-fx-background-color: white;"); //muda a cor dá tab
             novaAba.setContent(content);
             _tabPane.getTabs().add(novaAba);
             novaAba.getTabPane().getSelectionModel().select(novaAba);

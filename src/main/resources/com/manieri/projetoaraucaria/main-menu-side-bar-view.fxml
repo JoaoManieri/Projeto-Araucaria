@@ -31,9 +31,9 @@
                <content>
                    <VBox fx:id="vbox_sideMenu" alignment="TOP_CENTER" spacing="10.0" style="-fx-padding: 10px; -fx-background-color: #333;">
                      <children>
-                            <Button fx:id="button_orcaments" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#clicTasks" prefHeight="63.0" prefWidth="260.0" stylesheets="@css/fullpackstyling.css" text="Tarefas" textFill="WHITE">
+                            <Button fx:id="button_orcaments" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#clicTasks" prefHeight="63.0" prefWidth="260.0" stylesheets="@css/fullpackstyling.css" text="Tasks" textFill="WHITE">
                                 <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="FILE" size="20.0" text="" />
+                                    <FontAwesomeIconView fill="WHITE" glyphName="ARROWS" size="20.0" text="" />
                                 </graphic>
                                 <padding>
                                     <Insets left="50.0" />
@@ -42,7 +42,7 @@
                                     <Font size="20.0" />
                                 </font>
                             </Button>
-                            <Button fx:id="button_users" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#clickCostumers" prefHeight="63.0" prefWidth="260.0" stylesheets="@css/fullpackstyling.css" text="Usuarios" textFill="WHITE">
+                            <Button fx:id="button_users" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#clickFastDaily" prefHeight="63.0" prefWidth="260.0" stylesheets="@css/fullpackstyling.css" text="Fast Meets" textFill="WHITE">
                                 <graphic>
                                     <FontAwesomeIconView fill="WHITE" glyphName="USERS" size="20.0" />
                                 </graphic>
@@ -53,7 +53,7 @@
                                     <Font size="20.0" />
                                 </font>
                             </Button>
-                            <Button fx:id="button_normas" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#clickRules" prefHeight="63.0" prefWidth="260.0" stylesheets="@css/fullpackstyling.css" text="Projetos" textFill="WHITE">
+                            <Button fx:id="button_normas" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#clickRules" prefHeight="63.0" prefWidth="260.0" stylesheets="@css/fullpackstyling.css" text="Projects" textFill="WHITE">
                                 <graphic>
                                     <FontAwesomeIconView fill="WHITE" glyphName="BOOK" size="20.0" />
                                 </graphic>
@@ -64,7 +64,7 @@
                                     <Font size="20.0" />
                                 </font>
                             </Button>
-                            <Button fx:id="button_settings" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#clickSettings" prefHeight="63.0" prefWidth="260.0" stylesheets="@css/fullpackstyling.css" text="Configurações" textFill="WHITE">
+                            <Button fx:id="button_settings" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#clickSettings" prefHeight="63.0" prefWidth="260.0" stylesheets="@css/fullpackstyling.css" text="- - " textFill="WHITE">
                                 <graphic>
                                     <FontAwesomeIconView fill="WHITE" glyphName="GEAR" size="20.0" />
                                 </graphic>
