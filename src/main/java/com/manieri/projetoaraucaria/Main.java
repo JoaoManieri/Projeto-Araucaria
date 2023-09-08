@@ -1,5 +1,6 @@
 package com.manieri.projetoaraucaria;
 
+import com.manieri.projetoaraucaria.requests.login.LoginRequest;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
@@ -11,19 +12,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
 public class Main extends Application {
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws IOException {
         CheckBox checkBox = new CheckBox("CheckBox com Cor de Caixinha");
-
-        // Aplicar um estilo CSS personalizado para a caixinha
-        checkBox.setStyle(
-                ".check-box:selected {-fx-background-color: red;}"
-        );
 
         StackPane root = new StackPane();
         root.getChildren().add(checkBox);
@@ -33,6 +30,8 @@ public class Main extends Application {
         primaryStage.setTitle("Mudar Cor da Caixinha do CheckBox em JavaFX");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        new LoginRequest().checkLogin();
     }
 
     public static void main(String[] args) {

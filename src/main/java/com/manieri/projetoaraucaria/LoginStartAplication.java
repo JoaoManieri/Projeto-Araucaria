@@ -14,7 +14,7 @@ LoginStartAplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(LoginStartAplication.class.getResource("login-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("login-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         LoginController controller = fxmlLoader.getController();
@@ -23,6 +23,8 @@ LoginStartAplication extends Application {
         Image icon = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/com/manieri/projetoaraucaria/img/logotipo.png")));
         stage.getIcons().add(icon);
 
+        fxmlLoader.getController();
+
 
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Login");
@@ -30,11 +32,11 @@ LoginStartAplication extends Application {
         stage.show();
 
 
-        try {
-            controller.clicLogin();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            controller.clicLogin();
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
 
     }
 

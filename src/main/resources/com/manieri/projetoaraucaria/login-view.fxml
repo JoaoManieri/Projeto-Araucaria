@@ -25,14 +25,14 @@
    <center>
     <AnchorPane prefHeight="500.0" prefWidth="460.0" style="-fx-background-color: #383838;" BorderPane.alignment="CENTER">
       <children>
-        <TextField layoutX="111.0" layoutY="227.0" promptText="Usuario" style="-fx-background-color: transparent; -fx-border-color: #0250A6; -fx-border-width: 0px 0px 2px 0px;" />
-        <PasswordField layoutX="111.0" layoutY="277.0" promptText="Senha" style="-fx-background-color: tranparent; -fx-border-color: #0250A6; -fx-border-width: 0px 0px 2px 0px;" />
-        <FontAwesomeIconView fill="#0250a6" glyphName="LOCK" layoutX="86.0" layoutY="297.0" size="20" wrappingWidth="15.857142448425293" />
-        <FontAwesomeIconView fill="#0250a6" glyphName="USER" layoutX="87.0" layoutY="250.0" size="20" />
-        <Button fx:id="loginButton" layoutX="94.0" layoutY="359.0" mnemonicParsing="false" onAction="#clicLogin" prefHeight="30.0" prefWidth="186.0" style="-fx-background-color: #0250A6; -fx-border-radius: 10px;" text="Login" textFill="WHITE" />
-        <FontAwesomeIconView fill="#0250a6" glyphName="USERS" layoutX="143.0" layoutY="149.0" size="60" />
+        <TextField layoutX="111.0" layoutY="227.0" promptText="Usuario" style="-fx-background-color: transparent; -fx-border-color: #007ACC; -fx-border-width: 0px 0px 2px 0px;" />
+        <PasswordField layoutX="111.0" layoutY="277.0" promptText="Senha" style="-fx-background-color: tranparent; -fx-border-color: #007ACC; -fx-border-width: 0px 0px 2px 0px;" />
+        <FontAwesomeIconView fill="#007acc" glyphName="LOCK" layoutX="86.0" layoutY="297.0" size="20" wrappingWidth="15.857142448425293" />
+        <FontAwesomeIconView fill="#007acc" glyphName="USER" layoutX="87.0" layoutY="250.0" size="20" />
+        <Button fx:id="loginButton" layoutX="94.0" layoutY="359.0" mnemonicParsing="false" onAction="#clicLogin" prefHeight="30.0" prefWidth="186.0" style="-fx-background-color: #007ACC; -fx-border-radius: 10px;" stylesheets="@css/fullpackstyling.css" text="Login" textFill="WHITE" />
+        <FontAwesomeIconView fill="#007acc" glyphName="USERS" layoutX="143.0" layoutY="149.0" size="60" />
         <FontAwesomeIconView fill="#0250a6" glyphName="TIMES" layoutX="324.0" layoutY="25.0" onMouseClicked="#clicExit" size="16" />
-        <CheckBox alignment="CENTER" layoutX="110.0" layoutY="323.0" mnemonicParsing="false" text="Lembrar de mim" textAlignment="JUSTIFY" textFill="#0250a6" textOverrun="WORD_ELLIPSIS" />
+        <CheckBox alignment="CENTER" layoutX="110.0" layoutY="323.0" mnemonicParsing="false" text="Lembrar de mim" textAlignment="JUSTIFY" textFill="#007acc" textOverrun="WORD_ELLIPSIS" />
       </children>
     </AnchorPane>
    </center>
