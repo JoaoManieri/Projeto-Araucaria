@@ -53,6 +53,7 @@ public class Requests {
 
         /** -> Return CODE **/
         int responseCode = connection.getResponseCode();
+        System.out.println(responseCode);
 
         try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
             StringBuilder response = new StringBuilder();

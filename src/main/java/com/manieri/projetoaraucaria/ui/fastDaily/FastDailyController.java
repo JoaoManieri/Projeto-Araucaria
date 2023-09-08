@@ -1,6 +1,7 @@
 package com.manieri.projetoaraucaria.ui.fastDaily;
 
 import com.manieri.projetoaraucaria.LoginStartAplication;
+import com.manieri.projetoaraucaria.model.CalendarDayPart;
 import com.manieri.projetoaraucaria.model.CalendarFormater;
 import com.manieri.projetoaraucaria.model.Issues;
 import com.manieri.projetoaraucaria.requests.issues.IssuesRequest;
@@ -134,7 +135,8 @@ public class FastDailyController implements Initializable {
         stakPane.setAlignment(Pos.CENTER); // Centralize o conteúdo
         gridPane.add(stakPane, colum, row);
         CalendarController calendarController = loader.getController();
-        calendarController.setDay(monthDay, color, menu);
+
+        calendarController.setDay(new CalendarDayPart(monthDay,color,menu, 10.5F));
         listCalendar.add(calendarController);
     }
 

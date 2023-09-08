@@ -1,5 +1,6 @@
 package com.manieri.projetoaraucaria.ui.fastDaily;
 
+import com.manieri.projetoaraucaria.model.CalendarDayPart;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.paint.Color;
@@ -18,11 +19,16 @@ public class CalendarController {
     @FXML
     private Text month_day;
 
-    public void setDay(String day, String color, boolean menu) {
-        this.day = day;
-        month_day.setText(day);
-        month_day.setFill(Color.web(color));
-        daily_checkbox.setVisible(menu);
+    public void setDay(CalendarDayPart day) {
+        this.day = day.getDay();
+        month_day.setText(day.getDay());
+        month_day.setFill(Color.web(day.getColor()));
+
+        hours_text.setText(String.valueOf(day.getHours()));
+
+        daily_checkbox.setVisible(day.isMenu());
+        hours_text.setVisible(day.isMenu());
+
     }
 
     public boolean getDaily(){
