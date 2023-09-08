@@ -10,6 +10,9 @@ public class CalendarController {
     String day;
 
     @FXML
+    private Text hours_text;
+
+    @FXML
     private CheckBox daily_checkbox;
 
     @FXML

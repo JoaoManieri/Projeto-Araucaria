@@ -23,5 +23,4 @@ module com.manieri.projetosequoia {
     opens com.manieri.projetoaraucaria.ui.fastDaily;
     opens com.manieri.projetoaraucaria to javafx.fxml;
     opens com.manieri.projetoaraucaria.ui.mainmenu to javafx.fxml;
-
 }

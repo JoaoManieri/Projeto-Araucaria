@@ -13,5 +13,10 @@
          </font>
       </Text>
       <CheckBox fx:id="daily_checkbox" layoutX="14.0" layoutY="33.0" mnemonicParsing="false" style="-fx-background-color: #333;" text="REUNIÃO" textFill="WHITE" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" />
+      <Text fx:id="hours_text" fill="#3574f0" layoutX="213.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="--" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="3.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
