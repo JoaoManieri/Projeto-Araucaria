@@ -21,7 +21,6 @@ public class TaskListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ArrayList<String> list = new ArrayList<>();
         IssuesRequest issuesRequest = new IssuesRequest();
         try {
             newTask(issuesRequest.getAllIssues());
@@ -35,20 +34,32 @@ public class TaskListController implements Initializable {
 
 
     protected void newTask(ArrayList<Issues> taskList) {
+        ArrayList<Issues> warranty_task = new ArrayList<>();
+        ArrayList<Issues> general_task = new ArrayList<>();
         taskList.forEach(task -> {
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(LoginStartAplication.class.getResource("views/tasks/new-task-item.fxml"));
-                Node content = null;
-                content = fxmlLoader.load();
-
-                NewTaskItemController controller = fxmlLoader.getController();
-                controller.changeName(task);
-
-                TaskListController._vbox = this.vbox;
-                vbox.getChildren().add(2, content);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+            if (task.getStatus().getId() == 11) {
+                warranty_task.add(task);
+            } else {
+                general_task.add(task);
             }
         });
+        warranty_task.forEach(this::newRowIssue);
+        general_task.forEach(this::newRowIssue);
+    }
+
+    private void newRowIssue(Issues task) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(LoginStartAplication.class.getResource("views/tasks/new-task-item.fxml"));
+            Node content = null;
+            content = fxmlLoader.load();
+
+            NewTaskItemController controller = fxmlLoader.getController();
+            controller.changeName(task);
+
+            TaskListController._vbox = this.vbox;
+            vbox.getChildren().add(2, content);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

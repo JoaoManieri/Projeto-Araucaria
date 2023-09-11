@@ -11,13 +11,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.Dictionary;
 
 public class Requests {
 
     private static final String userlink = CREDENTIALS.userlink;
     private static final String username = CREDENTIALS.username;
     private static final String password = CREDENTIALS.password;
+
+    public static int REQUEST_STATUS_CODE;
 
     public JsonNode POST(String endpoint, String data) throws IOException {
 
@@ -37,6 +38,25 @@ public class Requests {
         return getJsonNode(connection);
     }
 
+    public int PUT(String endpoint, String parameters) throws IOException{
+
+        String apiUrl = userlink + endpoint;
+        byte[] postData = parameters.getBytes(StandardCharsets.UTF_8);
+        URL url = new URL(apiUrl);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("PUT");
+        connection.setDoOutput(true);
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestProperty("Authorization", "Basic " + Base64.getEncoder().encodeToString((username + ":" + password).getBytes()));
+
+        try (OutputStream os = connection.getOutputStream()) {
+            os.write(postData);
+        }
+        getJsonNode(connection);
+
+        return REQUEST_STATUS_CODE;
+    }
+
     public JsonNode GET(String endpoint) throws IOException {
         String apiUrl = userlink + endpoint;
         URL url = new URL(apiUrl);
@@ -52,8 +72,7 @@ public class Requests {
     private JsonNode getJsonNode(HttpURLConnection connection) throws IOException {
 
         /** -> Return CODE **/
-        int responseCode = connection.getResponseCode();
-        System.out.println(responseCode);
+        REQUEST_STATUS_CODE = connection.getResponseCode();
 
         try (BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
             StringBuilder response = new StringBuilder();
@@ -69,4 +88,5 @@ public class Requests {
             return jsonResponse;
         }
     }
+
 }

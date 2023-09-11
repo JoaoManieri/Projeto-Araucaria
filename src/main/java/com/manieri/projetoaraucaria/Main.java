@@ -1,5 +1,10 @@
 package com.manieri.projetoaraucaria;
 
+import com.manieri.projetoaraucaria.model.IssueStatus;
+import com.manieri.projetoaraucaria.model.Issues;
+import com.manieri.projetoaraucaria.model.Project;
+import com.manieri.projetoaraucaria.model.Status;
+import com.manieri.projetoaraucaria.requests.issues.IssuesRequest;
 import com.manieri.projetoaraucaria.requests.login.LoginRequest;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -17,24 +22,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
-public class Main extends Application {
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-        CheckBox checkBox = new CheckBox("CheckBox com Cor de Caixinha");
+public class Main   {
+    public static void main(String[] args) throws IOException {
+       System.out.println("teste de mudar status");
+        var issu = new Issues(20464, new Status(1, "", false),new Project(0,""),"");
 
-        StackPane root = new StackPane();
-        root.getChildren().add(checkBox);
-
-        Scene scene = new Scene(root, 300, 200);
-
-        primaryStage.setTitle("Mudar Cor da Caixinha do CheckBox em JavaFX");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        new LoginRequest().checkLogin();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+        new IssuesRequest().changeStatus(issu, IssueStatus.NEW);
     }
 }

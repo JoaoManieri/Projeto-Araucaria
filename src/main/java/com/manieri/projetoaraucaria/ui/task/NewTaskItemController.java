@@ -45,6 +45,14 @@ public class NewTaskItemController {
             //progress
             Color color = Color.web("#D5A400");
             textStatus.setFill(color);
+        } else if (task.getStatus().getId() == 11){
+            //progress
+            Color color = Color.web("#763896");
+            textStatus.setFill(color);
+        } else if (task.getStatus().getId() == 14){
+            //progress
+            Color color = Color.web("#B54545");
+            textStatus.setFill(color);
         }
         textStatus.setText(task.getStatus().getName());
         paneMain.setOnMouseClicked((MouseEvent event) -> {

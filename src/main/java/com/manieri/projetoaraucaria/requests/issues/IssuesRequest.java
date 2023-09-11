@@ -1,8 +1,10 @@
 package com.manieri.projetoaraucaria.requests.issues;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.manieri.projetoaraucaria.model.IssueStatus;
 import com.manieri.projetoaraucaria.model.Issues;
 import com.manieri.projetoaraucaria.model.Project;
 import com.manieri.projetoaraucaria.model.Status;
@@ -15,10 +17,10 @@ public class IssuesRequest extends Requests {
 
     public ArrayList<Issues> getAllIssues() throws IOException {
         ArrayList<Issues> issuesList = new ArrayList<>();
-        var response = GET("issues.json?assigned_to_id=me&status_id=2|3");
+        var response = GET("issues.json?assigned_to_id=me&status_id=2|3|11|14&limit=50");
         response.get("issues").forEach(resp -> {
             issuesList.add(new Issues(
-                    resp.get("parent").get("id").intValue(),
+                    resp.get("id").intValue(),
                     new Status(
                             resp.get("status").get("id").intValue(),
                             resp.get("status").get("name").toString().replace("\"", ""),
@@ -53,5 +55,16 @@ public class IssuesRequest extends Requests {
         return issuesList;
     }
 
+    public void changeStatus(Issues issues, IssueStatus newStatusId) throws IOException {
+        var endPoint = "/issues/" + issues.getIssuesId() + ".json";
 
+        ObjectMapper objectMapper = new ObjectMapper();
+        JsonNode jsonData = objectMapper.createObjectNode()
+                .put("status_id", newStatusId.getId());
+        ObjectNode payload = objectMapper.createObjectNode();
+        payload.set("issue", jsonData);
+        String data = objectMapper.writeValueAsString(payload);
+        var outCode = PUT(endPoint,data);
+        // System.out.println("classe: "+ getClass().getName() +" função: changeStatus result code -> "+ outCode);  ;
+    }
 }
