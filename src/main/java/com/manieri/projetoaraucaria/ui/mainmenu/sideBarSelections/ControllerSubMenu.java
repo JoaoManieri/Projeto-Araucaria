@@ -24,9 +24,9 @@ public class ControllerSubMenu extends MainMenuController {
 
     static class StatusSubMenu {
 
-        static Boolean subsessionOrderIsOpen = true;
-        static Boolean subsessionCostumersIsOpen = true;
-        static Boolean subsessionRulesIsOpen = true;
+        static Boolean subsessionTasksIsOpen = true;
+        static Boolean subsessionFastDailyIsOpen = true;
+        static Boolean subsessionUsersIsOpen = true;
         static Boolean subsessionSettingsIsOpen = false;
 
     }
@@ -34,15 +34,11 @@ public class ControllerSubMenu extends MainMenuController {
     void setSubSession(int relativeIndex, ArrayList<Button> listbuttons, Boolean subsessionIsOpen) {
 
         if (!subsessionIsOpen) {
-
             vboxMainMenu.getChildren().add(relativeIndex, subSessionVBox);
             subSessionVBox.setPadding(new Insets(0));
             subSessionVBox.getChildren().addAll(listbuttons);
-
         } else {
             vboxMainMenu.getChildren().remove(relativeIndex);
-
         }
-
     }
 }

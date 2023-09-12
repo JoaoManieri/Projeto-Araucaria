@@ -36,7 +36,7 @@ public class ControllerFastDaily extends ControllerSubMenu implements ModelSubMe
         newOrder.setOnAction(e -> weeklyQuickNote());
         buttonComplements(newOrder);
 
-        setSubSession(relativeIndex,arrayButtons,StatusSubMenu.subsessionCostumersIsOpen);
+        setSubSession(relativeIndex,arrayButtons,StatusSubMenu.subsessionFastDailyIsOpen);
     }
 
     private void buttonComplements(Button button) {
@@ -50,10 +50,10 @@ public class ControllerFastDaily extends ControllerSubMenu implements ModelSubMe
     }
 
     public void changeStatus() {
-        if(StatusSubMenu.subsessionCostumersIsOpen){
-            StatusSubMenu.subsessionCostumersIsOpen = false;
+        if(StatusSubMenu.subsessionFastDailyIsOpen){
+            StatusSubMenu.subsessionFastDailyIsOpen = false;
         } else {
-            StatusSubMenu.subsessionCostumersIsOpen = true;
+            StatusSubMenu.subsessionFastDailyIsOpen = true;
         }
     }
 

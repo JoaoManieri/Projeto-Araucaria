@@ -8,6 +8,7 @@ public class Issues {
     private Status status;
     private Project project;
     private String subject;
+    private String lastUpdate = null;
     public Issues(int issuesId, Status status, Project project, String subject) {
         this.issuesId = issuesId;
         this.status = status;
@@ -15,6 +16,15 @@ public class Issues {
         this.subject = subject;
     }
 
+    public Issues(int issuesId, Status status, Project project, String subject, String lastUpdate) {
+        this.issuesId = issuesId;
+        this.status = status;
+        this.project = project;
+        this.subject = subject;
+        this.lastUpdate = lastUpdate;
+    }
+
+    public String getLastUpdate(){return  lastUpdate; }
     public int getIssuesId() {
         return issuesId;
     }

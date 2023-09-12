@@ -1,6 +1,7 @@
 package com.manieri.projetoaraucaria.ui.task;
 
 import com.manieri.projetoaraucaria.LoginStartAplication;
+import com.manieri.projetoaraucaria.model.IssueStatus;
 import com.manieri.projetoaraucaria.model.Issues;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,24 +33,28 @@ public class NewTaskItemController {
     @FXML
     private AnchorPane paneMain;
 
+    @FXML
+    private Text daysToEnd_text;
+
     void changeName(Issues task){
 
         textName.setText(task.getSubject());
         textProject.setText(task.getProject().getName());
 
-        if(task.getStatus().getId() == 2){
+        if(task.getStatus().getId() == IssueStatus.NEW.getId()){
             //new
             Color color = Color.web("#648161");
             textStatus.setFill(color);
-        } else if(task.getStatus().getId() == 3){
+        } else if(task.getStatus().getId() == IssueStatus.IN_PROGRESS.getId()){
             //progress
             Color color = Color.web("#D5A400");
             textStatus.setFill(color);
-        } else if (task.getStatus().getId() == 11){
+        } else if (task.getStatus().getId() == IssueStatus.WARRANTY.getId()){
             //progress
             Color color = Color.web("#763896");
             textStatus.setFill(color);
-        } else if (task.getStatus().getId() == 14){
+            daysToEnd_text.setText(task.getLastUpdate());
+        } else if (task.getStatus().getId() == IssueStatus.BASAL.getId()){
             //progress
             Color color = Color.web("#B54545");
             textStatus.setFill(color);
@@ -62,6 +67,8 @@ public class NewTaskItemController {
                 throw new RuntimeException(e);
             }
         });
+
+
     }
 
     private void openModal(Issues task) throws IOException {

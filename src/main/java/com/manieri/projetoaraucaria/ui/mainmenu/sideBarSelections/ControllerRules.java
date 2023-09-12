@@ -60,7 +60,7 @@ public class ControllerRules extends ControllerSubMenu implements ModelSubMenu {
         button4.setOnAction(e -> testeDavi());
         button(button4);
 
-        setSubSession(relativeIndex, arrayButtons, StatusSubMenu.subsessionRulesIsOpen);
+        setSubSession(relativeIndex, arrayButtons, StatusSubMenu.subsessionUsersIsOpen);
     }
 
     private void button(Button button) {
@@ -75,10 +75,10 @@ public class ControllerRules extends ControllerSubMenu implements ModelSubMenu {
 
     @Override
     public void changeStatus() {
-        if (!StatusSubMenu.subsessionRulesIsOpen) {
-            StatusSubMenu.subsessionRulesIsOpen = true;
+        if (!StatusSubMenu.subsessionUsersIsOpen) {
+            StatusSubMenu.subsessionUsersIsOpen = true;
         } else {
-            StatusSubMenu.subsessionRulesIsOpen = false;
+            StatusSubMenu.subsessionUsersIsOpen = false;
         }
     }
 

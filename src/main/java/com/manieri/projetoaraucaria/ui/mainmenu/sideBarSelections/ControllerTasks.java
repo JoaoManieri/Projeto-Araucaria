@@ -39,12 +39,15 @@ public class ControllerTasks extends ControllerSubMenu implements ModelSubMenu {
         } catch (IOException ignored){
             //TODO Tratar erros de nao conexão com intenet
         }
-        if (!StatusSubMenu.subsessionOrderIsOpen) {
+        if (!StatusSubMenu.subsessionTasksIsOpen) {
             createNewSubmenu(new Status(IssueStatus.ALL.getId(), "All tasks", false));
+            createNewSubmenu(new Status(IssueStatus.NEW_AND_IN_PROGRESS.getId(), "Periodicos",false));
+            subMenuList.remove(new Status(IssueStatus.IN_PROGRESS.getId(),"In Progress",false));
+            subMenuList.remove(new Status(IssueStatus.NEW.getId(),"New",false));
             subMenuList.forEach(this::createNewSubmenu);
         }
 
-        setSubSession(relativeIndex, arrayButtons, StatusSubMenu.subsessionOrderIsOpen);
+        setSubSession(relativeIndex, arrayButtons, StatusSubMenu.subsessionTasksIsOpen);
     }
 
     private void createNewSubmenu(Status status){
@@ -67,10 +70,10 @@ public class ControllerTasks extends ControllerSubMenu implements ModelSubMenu {
     }
 
     public void changeStatus() {
-        if (!StatusSubMenu.subsessionOrderIsOpen) {
-            StatusSubMenu.subsessionOrderIsOpen = true;
+        if (!StatusSubMenu.subsessionTasksIsOpen) {
+            StatusSubMenu.subsessionTasksIsOpen = true;
         } else {
-            StatusSubMenu.subsessionOrderIsOpen = false;
+            StatusSubMenu.subsessionTasksIsOpen = false;
         }
     }
 

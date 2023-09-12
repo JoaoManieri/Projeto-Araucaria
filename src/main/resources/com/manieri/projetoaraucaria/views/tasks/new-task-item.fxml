@@ -17,9 +17,14 @@
             <Font size="14.0" />
          </font>
       </Text>
-      <Text fx:id="textStatus" fill="WHITE" layoutX="950.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="--" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="30.0">
+      <Text fx:id="textStatus" fill="WHITE" layoutX="778.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="--" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="207.603515625" AnchorPane.topAnchor="30.0">
          <font>
             <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="daysToEnd_text" fill="WHITE" layoutX="945.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="--" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="30.0">
+         <font>
+            <Font size="14.0" />
          </font>
       </Text>
    </children>

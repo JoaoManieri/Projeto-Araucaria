@@ -19,7 +19,13 @@ public class IssuesRequest extends Requests {
 
     public ArrayList<Issues> getIssuesByStatus(int issueId) throws  IOException {
         ArrayList<Issues> issuesList = new ArrayList<>();
-        var response = GET("issues.json?assigned_to_id=me&status_id="+ issueId +"&limit=50");
+        JsonNode response;
+        if (issueId == -1){
+            response = GET("issues.json?assigned_to_id=me&status_id=2|3&limit=50");
+        }else {
+            response = GET("issues.json?assigned_to_id=me&status_id="+ issueId +"&limit=50");
+        }
+
         return getIssues(issuesList, response);
     }
 
@@ -41,7 +47,8 @@ public class IssuesRequest extends Requests {
                             resp.get("project").get("id").intValue(),
                             resp.get("project").get("name").toString().replace("\"", "")
                     ),
-                    resp.get("subject").toString().replace("\"", "")
+                    resp.get("subject").toString().replace("\"", ""),
+                    resp.get("updated_on").toString().replace("\"", "")
             ));
         });
         return issuesList;
