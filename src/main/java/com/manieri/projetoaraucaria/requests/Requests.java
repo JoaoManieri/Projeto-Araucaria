@@ -20,7 +20,7 @@ public class Requests {
 
     public static int REQUEST_STATUS_CODE;
 
-    public JsonNode POST(String endpoint, String data) throws IOException {
+    protected JsonNode POST(String endpoint, String data) throws IOException {
 
         String apiUrl = userlink + endpoint;
         byte[] postData = data.getBytes(StandardCharsets.UTF_8);
@@ -38,7 +38,7 @@ public class Requests {
         return getJsonNode(connection);
     }
 
-    public int PUT(String endpoint, String parameters) throws IOException{
+    protected int PUT(String endpoint, String parameters) throws IOException{
 
         String apiUrl = userlink + endpoint;
         byte[] postData = parameters.getBytes(StandardCharsets.UTF_8);
@@ -57,7 +57,7 @@ public class Requests {
         return REQUEST_STATUS_CODE;
     }
 
-    public JsonNode GET(String endpoint) throws IOException {
+    protected JsonNode GET(String endpoint) throws IOException {
         String apiUrl = userlink + endpoint;
         URL url = new URL(apiUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();

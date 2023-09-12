@@ -15,9 +15,21 @@ import java.util.ArrayList;
 
 public class IssuesRequest extends Requests {
 
+    final String issuesTypesID = "2|3|11|14";
+
+    public ArrayList<Issues> getIssuesByStatus(int issueId) throws  IOException {
+        ArrayList<Issues> issuesList = new ArrayList<>();
+        var response = GET("issues.json?assigned_to_id=me&status_id="+ issueId +"&limit=50");
+        return getIssues(issuesList, response);
+    }
+
     public ArrayList<Issues> getAllIssues() throws IOException {
         ArrayList<Issues> issuesList = new ArrayList<>();
-        var response = GET("issues.json?assigned_to_id=me&status_id=2|3|11|14&limit=50");
+        var response = GET("issues.json?assigned_to_id=me&status_id="+ issuesTypesID +"&limit=50");
+        return getIssues(issuesList, response);
+    }
+
+    private ArrayList<Issues> getIssues(ArrayList<Issues> issuesList, JsonNode response) {
         response.get("issues").forEach(resp -> {
             issuesList.add(new Issues(
                     resp.get("id").intValue(),
@@ -33,6 +45,20 @@ public class IssuesRequest extends Requests {
             ));
         });
         return issuesList;
+    }
+
+    public ArrayList<Status> getIssuesByStatus() throws  IOException {
+        ArrayList<Status> issuesTypeList = new ArrayList<>();
+        var response = GET("issues.json?assigned_to_id=me&status_id="+ issuesTypesID +"&limit=50");
+        response.get("issues").forEach(resp -> {
+            Status status = new Status(resp.get("status").get("id").intValue(),
+                    resp.get("status").get("name").toString().replace("\"", ""),
+                    resp.get("status").get("is_closed").booleanValue());
+            if(!issuesTypeList.contains(status)){
+                issuesTypeList.add(status);
+            }
+        });
+        return issuesTypeList;
     }
 
     public ArrayList<Issues> insertIssues(int issue_id, String date, String hours, String comment) throws IOException {
@@ -68,3 +94,5 @@ public class IssuesRequest extends Requests {
         // System.out.println("classe: "+ getClass().getName() +" função: changeStatus result code -> "+ outCode);  ;
     }
 }
+
+

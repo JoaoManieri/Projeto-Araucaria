@@ -1,6 +1,7 @@
 package com.manieri.projetoaraucaria.model;
 
 public enum IssueStatus {
+    ALL(0),
     DONE(4),
     NEW(2),
     IN_PROGRESS(3),

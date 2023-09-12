@@ -55,7 +55,7 @@ public class ModalTaskController implements Initializable {
     void sendInfoToApi(ActionEvent event) throws IOException {
         var request = new IssuesRequest();
         request.insertIssues(issues.getIssuesId(), String.valueOf(datePicker.getValue()), hours.getText(), comment.getText());
-        request.changeStatus(issues,);
+        //request.changeStatus(issues, );
     }
 
     void setIssues(Issues issues) {
@@ -104,16 +104,16 @@ public class ModalTaskController implements Initializable {
         checkBoxArrayList.add(checkBox);
     }
 
-    private int getIssueStatus(){
-        checkBoxArrayList.forEach(checkBox -> {
-            if (checkBox.isSelected()){
-                if(checkBox == basal_task){
-                    return IssueStatus.BASAL.getId();
-                }
-            } else{
-                return IssueStatus.IN_PROGRESS.getId();
-            }
-        });
-        return IssueStatus.IN_PROGRESS;
-    }
+//    private int getIssueStatus(){
+//        checkBoxArrayList.forEach(checkBox -> {
+//            if (checkBox.isSelected()){
+//                if(checkBox == basal_task){
+//                    return IssueStatus.BASAL.getId();
+//                }
+//            } else{
+//                return IssueStatus.IN_PROGRESS.getId();
+//            }
+//        });
+//        return IssueStatus.IN_PROGRESS;
+//    }
 }

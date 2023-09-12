@@ -20,30 +20,32 @@ public class TaskListController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        IssuesRequest issuesRequest = new IssuesRequest();
-        try {
-            newTask(issuesRequest.getAllIssues());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        System.out.println("Inicialização da view");
     }
 
     @FXML
     private VBox vbox;
 
+    public void updateIssuesList(int id, boolean allIssues) {
+        IssuesRequest issuesRequest = new IssuesRequest();
+        if (allIssues) {
+            try {
+                newTask(issuesRequest.getAllIssues());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            try {
+                newTask(issuesRequest.getIssuesByStatus(id));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
 
     protected void newTask(ArrayList<Issues> taskList) {
-        ArrayList<Issues> warranty_task = new ArrayList<>();
-        ArrayList<Issues> general_task = new ArrayList<>();
-        taskList.forEach(task -> {
-            if (task.getStatus().getId() == 11) {
-                warranty_task.add(task);
-            } else {
-                general_task.add(task);
-            }
-        });
-        warranty_task.forEach(this::newRowIssue);
+        ArrayList<Issues> general_task = new ArrayList<>(taskList);
         general_task.forEach(this::newRowIssue);
     }
 
