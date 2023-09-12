@@ -4,6 +4,7 @@ import com.manieri.projetoaraucaria.LoginStartAplication;
 import com.manieri.projetoaraucaria.model.CalendarDayPart;
 import com.manieri.projetoaraucaria.model.CalendarFormater;
 import com.manieri.projetoaraucaria.model.Issues;
+import com.manieri.projetoaraucaria.requests.hours.HoursRequest;
 import com.manieri.projetoaraucaria.requests.issues.IssuesRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,6 +58,16 @@ public class FastDailyController implements Initializable {
         task_comboBox.setCellFactory(item -> new IssuesListCell());
         task_comboBox.setButtonCell(new IssuesListCell());
 
+       generateCalendar();
+
+    }
+
+    public void updateCalendar(){
+        generateCalendar();
+    }
+
+    private void generateCalendar() {
+
         try {
             setTitle("Domingo", 0, "#Ab3310");
             setTitle("Segunda-feira", 1, "#FFFFFF");
@@ -67,7 +78,12 @@ public class FastDailyController implements Initializable {
             setTitle("Sabado", 6, "#FFFFFF");
         } catch (IOException ignored) {
         }
-        setWeekDays();
+
+        try {
+            setWeekDays();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void setTitle(String label, int colum, String color) throws IOException {
@@ -78,7 +94,7 @@ public class FastDailyController implements Initializable {
         gridPane.add(day, colum, 0);
     }
 
-    private void setWeekDays() {
+    private void setWeekDays() throws IOException {
 
         LocalDate dataAtual = LocalDate.now();
         int mesAtual = dataAtual.getMonthValue();
@@ -91,7 +107,7 @@ public class FastDailyController implements Initializable {
         ArrayList<CalendarFormater> listDays = new ArrayList<>();
 
         for (LocalDate data = primeiroDiaDoMes; !data.isAfter(ultimoDiaDoMes); data = data.plusDays(1)) {
-            int indiceDiaSemana = (data.getDayOfWeek().getValue()) % 7 + 1; // 7 (Dom) a 6 (Sab)
+            int indiceDiaSemana = (data.getDayOfWeek().getValue()) % 7 + 1;
             listDays.add(new CalendarFormater(indiceDiaSemana, data.format(formatter)));
         }
 
@@ -99,21 +115,24 @@ public class FastDailyController implements Initializable {
 
     }
 
-    private void alocDays(ArrayList<CalendarFormater> listDays) {
+    private void alocDays(ArrayList<CalendarFormater> listDays) throws IOException {
+
+        var hour = new HoursRequest().getMonthHours();
         final int[] row = {1};
         listDays.forEach(it -> {
             if ((it.getDayofWeek()) == 1) {
                 try {
-                    setlayoutDays(it.getDayOfMonth(), (it.getDayofWeek() - 1), row[0], "#Ab3310", false);
+                    setlayoutDays(it.getDayOfMonth(), (it.getDayofWeek() - 1), row[0], "#Ab3310", false, 0F);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             } else {
                 try {
                     if (it.getDayofWeek() == 7) {
-                        setlayoutDays(it.getDayOfMonth(), (it.getDayofWeek() - 1), row[0], "#FFFFFF", false);
+                        setlayoutDays(it.getDayOfMonth(), (it.getDayofWeek() - 1), row[0], "#FFFFFF", false, 0F);
                     } else {
-                        setlayoutDays(it.getDayOfMonth(), (it.getDayofWeek() - 1), row[0], "#FFFFFF", true);
+                        var hoursByMonthDay = hour.get(Integer.parseInt(it.getDayOfMonth()));
+                        setlayoutDays(it.getDayOfMonth(), (it.getDayofWeek() - 1), row[0], "#FFFFFF", true, (Float) hoursByMonthDay);
                     }
 
                 } catch (IOException e) {
@@ -127,7 +146,7 @@ public class FastDailyController implements Initializable {
         });
     }
 
-    private void setlayoutDays(String monthDay, int colum, int row, String color, boolean menu) throws IOException {
+    private void setlayoutDays(String monthDay, int colum, int row, String color, boolean menu, float hours) throws IOException {
 
         FXMLLoader loader = new FXMLLoader(LoginStartAplication.class.getResource("views/fastDaily/calendar-part.fxml"));
         StackPane stakPane = new StackPane();
@@ -136,7 +155,7 @@ public class FastDailyController implements Initializable {
         gridPane.add(stakPane, colum, row);
         CalendarController calendarController = loader.getController();
 
-        calendarController.setDay(new CalendarDayPart(monthDay,color,menu, 10.5F));
+        calendarController.setDay(new CalendarDayPart(monthDay,color,menu, hours));
         listCalendar.add(calendarController);
     }
 
@@ -151,13 +170,17 @@ public class FastDailyController implements Initializable {
         listCalendar.forEach(it -> {
             if (it.getDaily()) {
                 String date = String.format("%04d-%02d-%02d", anoAtual,mesAtual,Integer.parseInt(it.day));
-                try {
-                    new IssuesRequest().insertIssues(task_comboBox.getValue().getIssuesId(),date,meeting_time.getText(),meeting_coment.getText());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+                System.out.println("Teste");
+
+//                try {
+//                    new IssuesRequest().insertIssues(task_comboBox.getValue().getIssuesId(),date,meeting_time.getText(),meeting_coment.getText());
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
             }
         });
+
+        updateCalendar();
 
     }
 

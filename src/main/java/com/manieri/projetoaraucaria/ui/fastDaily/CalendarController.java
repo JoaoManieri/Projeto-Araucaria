@@ -20,6 +20,7 @@ public class CalendarController {
     private Text month_day;
 
     public void setDay(CalendarDayPart day) {
+
         this.day = day.getDay();
         month_day.setText(day.getDay());
         month_day.setFill(Color.web(day.getColor()));
