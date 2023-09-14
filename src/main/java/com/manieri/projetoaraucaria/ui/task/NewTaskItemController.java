@@ -86,6 +86,7 @@ public class NewTaskItemController {
 
         ModalTaskController controller = loader.getController();
         controller.setIssues(task);
+
         modalStage.showAndWait();
 
     }

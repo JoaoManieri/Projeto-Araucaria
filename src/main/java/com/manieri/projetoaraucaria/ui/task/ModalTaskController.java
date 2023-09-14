@@ -8,30 +8,37 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 
 public class ModalTaskController implements Initializable {
 
     @FXML
-    private CheckBox InProgress_task;
+    private CheckBox inProgress_task;
 
     @FXML
     private CheckBox basal_task;
+
+    @FXML
+    private CheckBox done_task;
+
+    @FXML
+    private CheckBox warranty_task;
 
     @FXML
     private TextArea comment;
 
     @FXML
     private DatePicker datePicker;
-
-    @FXML
-    private CheckBox done_task;
 
     @FXML
     private TextField hours;
@@ -42,28 +49,42 @@ public class ModalTaskController implements Initializable {
     @FXML
     private Text taskName;
 
-    @FXML
-    private CheckBox warranty_task;
-
     private Issues issues;
 
-    private ArrayList<CheckBox> checkBoxArrayList = new ArrayList<>();
+    private final ArrayList<CheckBox> checkBoxArrayList = new ArrayList<>();
 
-    IssueStatus issueStatus;
+    int issueStatus;
+
 
     @FXML
     void sendInfoToApi(ActionEvent event) throws IOException {
+
         var request = new IssuesRequest();
         request.insertIssues(issues.getIssuesId(), String.valueOf(datePicker.getValue()), hours.getText(), comment.getText());
-        //request.changeStatus(issues, );
+        int newStatus = getIssueStatus();
+        IssueStatus status = IssueStatus.fromId(newStatus);
+        System.out.println("Status correspondente ao ID " + newStatus + ": " + status);
+        if(newStatus != issueStatus){
+            request.changeStatus(issues, status);
+        }
+
+        Node sourceNode = (Node) event.getSource();
+        Stage stage = (Stage) sourceNode.getScene().getWindow();
+
+        
+
+        stage.close();
+
     }
 
     void setIssues(Issues issues) {
+
         this.issues = issues;
+        issueStatus =issues.getStatus().getId();
         taskName.setText(issues.getSubject());
 
         if (issues.getStatus().getId() == IssueStatus.NEW.getId() || issues.getStatus().getId() == IssueStatus.IN_PROGRESS.getId()) {
-            InProgress_task.setSelected(true);
+            inProgress_task.setSelected(true);
         } else if (issues.getStatus().getId() == IssueStatus.BASAL.getId()) {
             basal_task.setSelected(true);
         } else if (issues.getStatus().getId() == IssueStatus.WARRANTY.getId()) {
@@ -71,16 +92,21 @@ public class ModalTaskController implements Initializable {
         } else if (issues.getStatus().getId() == IssueStatus.DONE.getId()) {
             done_task.setSelected(true);
         }
+
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        newCheckBoxListener(InProgress_task);
+        datePicker.setValue(LocalDate.now());
+
+        newCheckBoxListener(inProgress_task);
         newCheckBoxListener(basal_task);
         newCheckBoxListener(done_task);
         newCheckBoxListener(warranty_task);
+
+
 
     }
 
@@ -104,16 +130,12 @@ public class ModalTaskController implements Initializable {
         checkBoxArrayList.add(checkBox);
     }
 
-//    private int getIssueStatus(){
-//        checkBoxArrayList.forEach(checkBox -> {
-//            if (checkBox.isSelected()){
-//                if(checkBox == basal_task){
-//                    return IssueStatus.BASAL.getId();
-//                }
-//            } else{
-//                return IssueStatus.IN_PROGRESS.getId();
-//            }
-//        });
-//        return IssueStatus.IN_PROGRESS;
-//    }
+    private int getIssueStatus() {
+        if (inProgress_task.isSelected()) {return IssueStatus.IN_PROGRESS.getId();}
+        if (basal_task.isSelected()) {return IssueStatus.BASAL.getId();}
+        if (done_task.isSelected()) {return IssueStatus.DONE.getId();}
+        if (warranty_task.isSelected()) {return IssueStatus.WARRANTY.getId();}
+        return IssueStatus.IN_PROGRESS.getId();
+    }
+
 }

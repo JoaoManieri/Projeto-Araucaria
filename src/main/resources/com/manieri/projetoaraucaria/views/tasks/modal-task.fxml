@@ -26,7 +26,7 @@
       <CheckBox fx:id="warranty_task" layoutX="121.0" layoutY="146.0" mnemonicParsing="false" text="Warranty" textFill="WHITE" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="145.0" />
       <CheckBox fx:id="done_task" layoutX="205.0" layoutY="147.0" mnemonicParsing="false" text="Done" textFill="WHITE" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="145.0" />
       <Text fill="WHITE" layoutX="309.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Data da tarefa" />
-      <CheckBox fx:id="InProgress_task" layoutX="29.0" layoutY="146.0" mnemonicParsing="false" text="In Progress" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="145.0" />
+      <CheckBox fx:id="inProgress_task" layoutX="29.0" layoutY="146.0" mnemonicParsing="false" text="In Progress" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="145.0" />
       <CheckBox fx:id="basal_task" layoutX="496.0" layoutY="146.0" mnemonicParsing="false" text="Basal" textFill="WHITE" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="145.0" />
    </children>
 </AnchorPane>

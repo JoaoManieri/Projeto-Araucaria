@@ -18,4 +18,13 @@ public enum IssueStatus {
     public int getId() {
         return id;
     }
+
+    public static IssueStatus fromId(int id) {
+        for (IssueStatus status : IssueStatus.values()) {
+            if (status.id == id) {
+                return status;
+            }
+        }
+        throw new IllegalArgumentException("ID não corresponde a nenhum valor de enumeração");
+    }
 }

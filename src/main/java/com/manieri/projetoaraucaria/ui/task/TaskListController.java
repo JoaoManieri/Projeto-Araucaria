@@ -14,9 +14,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class TaskListController implements Initializable {
+public class TaskListController implements Initializable{
 
     static VBox _vbox;
+
+    private boolean allIssues;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -26,7 +28,12 @@ public class TaskListController implements Initializable {
     @FXML
     private VBox vbox;
 
+    private int id;
+
     public void updateIssuesList(int id, boolean allIssues) {
+
+        this.id = id;
+
         IssuesRequest issuesRequest = new IssuesRequest();
         if (allIssues) {
             try {

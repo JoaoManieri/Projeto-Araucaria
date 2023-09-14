@@ -13,6 +13,7 @@ module com.manieri.projetosequoia {
 
     requires java.desktop;
     requires javafx.web;
+    requires java.net.http;
 
     exports com.manieri.projetoaraucaria;
     exports com.manieri.projetoaraucaria.ui.mainmenu;
