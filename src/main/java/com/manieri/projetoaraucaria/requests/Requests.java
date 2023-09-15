@@ -17,7 +17,6 @@ public class Requests {
     private static final String userlink = CREDENTIALS.userlink;
     private static final String username = CREDENTIALS.username;
     private static final String password = CREDENTIALS.password;
-
     public static int REQUEST_STATUS_CODE;
 
     protected JsonNode POST(String endpoint, String data) throws IOException {
@@ -53,7 +52,6 @@ public class Requests {
             os.write(postData);
         }
         getJsonNode(connection);
-
         return REQUEST_STATUS_CODE;
     }
 

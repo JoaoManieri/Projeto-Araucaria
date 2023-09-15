@@ -29,12 +29,15 @@ public class TaskListController implements Initializable, Observer {
     @FXML
     private VBox vbox;
 
-    private int id;
+    private int id = -1;
 
     public void updateIssuesList(int id, boolean allIssues) {
 
-        this.id = id;
 
+            this.id = id;
+
+        System.out.println("init update");
+        System.out.println("init update --< ID: " + id + this.id);
         IssuesRequest issuesRequest = new IssuesRequest();
         if (allIssues) {
             try {
@@ -43,9 +46,11 @@ public class TaskListController implements Initializable, Observer {
                 throw new RuntimeException(e);
             }
         } else {
+            System.out.println("caiu aqui 2");
             try {
                 newTask(issuesRequest.getIssuesByStatus(id));
             } catch (IOException e) {
+                System.out.println("erro -> " + e);
                 throw new RuntimeException(e);
             }
         }
@@ -53,8 +58,9 @@ public class TaskListController implements Initializable, Observer {
 
 
     protected void newTask(ArrayList<Issues> taskList) {
-        ArrayList<Issues> general_task = new ArrayList<>(taskList);
-        general_task.forEach(this::newRowIssue);
+        System.out.println("Caiu aqui 2");
+        System.out.println(taskList);
+        taskList.forEach(this::newRowIssue);
     }
 
     private void newRowIssue(Issues task) {
@@ -75,7 +81,6 @@ public class TaskListController implements Initializable, Observer {
 
     @Override
     public void update() {
-        System.out.println("Atualizado");
-        updateIssuesList(id,false);
+        updateIssuesList(id, false);
     }
 }

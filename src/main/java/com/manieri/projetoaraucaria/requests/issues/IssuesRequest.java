@@ -18,6 +18,7 @@ public class IssuesRequest extends Requests {
     final String issuesTypesID = "2|3|11|14";
 
     public ArrayList<Issues> getIssuesByStatus(int issueId) throws  IOException {
+        System.out.println("ID -->> " + issueId);
         ArrayList<Issues> issuesList = new ArrayList<>();
         JsonNode response;
         if (issueId == -1){
@@ -32,6 +33,7 @@ public class IssuesRequest extends Requests {
     public ArrayList<Issues> getAllIssues() throws IOException {
         ArrayList<Issues> issuesList = new ArrayList<>();
         var response = GET("issues.json?assigned_to_id=me&status_id="+ issuesTypesID +"&limit=50");
+        System.out.println(response);
         return getIssues(issuesList, response);
     }
 
@@ -98,13 +100,14 @@ public class IssuesRequest extends Requests {
         payload.set("issue", jsonData);
         String data = objectMapper.writeValueAsString(payload);
         var outCode = PUT(endPoint,data);
-        // System.out.println("classe: "+ getClass().getName() +" função: changeStatus result code -> "+ outCode);
+        System.out.println("classe: "+ getClass().getName() +" função: changeStatus result code -> "+ outCode);
 
         if(outCode > 399){
             return false;
         }else {
             return true;
         }
+
     }
 }
 

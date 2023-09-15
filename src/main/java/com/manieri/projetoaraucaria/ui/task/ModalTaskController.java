@@ -66,15 +66,13 @@ public class ModalTaskController implements Initializable {
 
 
         int newStatus = getIssueStatus();
+        System.out.println("id retornado -->> " + newStatus);
         IssueStatus status = IssueStatus.fromId(newStatus);
-
-        boolean out = false;
-
+        System.out.println("IssueStatus.fromId -->> " + status);
         if(newStatus != issueStatus){
-            out = request.changeStatus(issues, status);
+            System.out.println("IssueStatus.fromId  " + newStatus);
+            request.changeStatus(issues, status);
         }
-
-        System.out.println("-->> Saida async? git" + out);
 
         Node sourceNode = (Node) event.getSource();
         Stage stage = (Stage) sourceNode.getScene().getWindow();
@@ -83,7 +81,7 @@ public class ModalTaskController implements Initializable {
         TaskListController observador = new TaskListController();
 
         liveData.addObserver(observador);
-        liveData.putData("");
+        liveData.putData(true);
 
         stage.close();
 
@@ -147,6 +145,7 @@ public class ModalTaskController implements Initializable {
         if (basal_task.isSelected()) {return IssueStatus.BASAL.getId();}
         if (done_task.isSelected()) {return IssueStatus.DONE.getId();}
         if (warranty_task.isSelected()) {return IssueStatus.WARRANTY.getId();}
+
         return IssueStatus.IN_PROGRESS.getId();
     }
 
