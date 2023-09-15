@@ -1,8 +1,10 @@
 package com.manieri.projetoaraucaria.ui.task;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.manieri.projetoaraucaria.model.IssueStatus;
 import com.manieri.projetoaraucaria.model.Issues;
 import com.manieri.projetoaraucaria.requests.issues.IssuesRequest;
+import com.manieri.projetoaraucaria.util.LiveData;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -60,18 +62,28 @@ public class ModalTaskController implements Initializable {
     void sendInfoToApi(ActionEvent event) throws IOException {
 
         var request = new IssuesRequest();
-        request.insertIssues(issues.getIssuesId(), String.valueOf(datePicker.getValue()), hours.getText(), comment.getText());
+//        request.insertIssues(issues.getIssuesId(), String.valueOf(datePicker.getValue()), hours.getText(), comment.getText());
+
+
         int newStatus = getIssueStatus();
         IssueStatus status = IssueStatus.fromId(newStatus);
-        System.out.println("Status correspondente ao ID " + newStatus + ": " + status);
+
+        boolean out = false;
+
         if(newStatus != issueStatus){
-            request.changeStatus(issues, status);
+            out = request.changeStatus(issues, status);
         }
+
+        System.out.println("-->> Saida async? git" + out);
 
         Node sourceNode = (Node) event.getSource();
         Stage stage = (Stage) sourceNode.getScene().getWindow();
 
-        
+        LiveData liveData = new LiveData();
+        TaskListController observador = new TaskListController();
+
+        liveData.addObserver(observador);
+        liveData.putData("");
 
         stage.close();
 

@@ -3,6 +3,7 @@ package com.manieri.projetoaraucaria.ui.task;
 import com.manieri.projetoaraucaria.LoginStartAplication;
 import com.manieri.projetoaraucaria.model.Issues;
 import com.manieri.projetoaraucaria.requests.issues.IssuesRequest;
+import com.manieri.projetoaraucaria.util.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -14,7 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class TaskListController implements Initializable{
+public class TaskListController implements Initializable, Observer {
 
     static VBox _vbox;
 
@@ -70,5 +71,11 @@ public class TaskListController implements Initializable{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void update() {
+        System.out.println("Atualizado");
+        updateIssuesList(id,false);
     }
 }

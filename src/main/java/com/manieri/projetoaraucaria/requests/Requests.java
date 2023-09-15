@@ -38,7 +38,7 @@ public class Requests {
         return getJsonNode(connection);
     }
 
-    protected int PUT(String endpoint, String parameters) throws IOException{
+    protected int PUT(String endpoint, String parameters) throws IOException {
 
         String apiUrl = userlink + endpoint;
         byte[] postData = parameters.getBytes(StandardCharsets.UTF_8);
@@ -89,5 +89,5 @@ public class Requests {
             return jsonResponse;
         }
     }
-
 }
+

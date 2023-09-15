@@ -88,7 +88,7 @@ public class IssuesRequest extends Requests {
         return issuesList;
     }
 
-    public void changeStatus(Issues issues, IssueStatus newStatusId) throws IOException {
+    public boolean changeStatus(Issues issues, IssueStatus newStatusId) throws IOException {
         var endPoint = "/issues/" + issues.getIssuesId() + ".json";
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -98,7 +98,13 @@ public class IssuesRequest extends Requests {
         payload.set("issue", jsonData);
         String data = objectMapper.writeValueAsString(payload);
         var outCode = PUT(endPoint,data);
-        // System.out.println("classe: "+ getClass().getName() +" função: changeStatus result code -> "+ outCode);  ;
+        // System.out.println("classe: "+ getClass().getName() +" função: changeStatus result code -> "+ outCode);
+
+        if(outCode > 399){
+            return false;
+        }else {
+            return true;
+        }
     }
 }
 
